@@ -1,0 +1,190 @@
+{
+    "appearance": {
+        "anim": {
+            "durations": {
+                "scale": 0.4
+            }
+        },
+        "transparency": {
+            "base": 0,
+            "enabled": false,
+            "layers": 0
+        }
+    },
+    "background": {
+        "desktopClock": {
+            "background": {
+                "blur": false,
+                "enabled": true,
+                "opacity": 0.35
+            },
+            "enabled": true,
+            "invertColors": false,
+            "position": "middle-center",
+            "scale": 1,
+            "shadow": {
+                "blur": 0,
+                "enabled": false,
+                "opacity": 0
+            }
+        },
+        "enabled": true,
+        "wallpaperEnabled": true
+    },
+    "bar": {
+        "activeWindow": {
+            "compact": true,
+            "inverted": false,
+            "showOnHover": true
+        },
+        "clock": {
+            "background": true,
+            "showDate": true,
+            "showIcon": false
+        },
+        "dragThreshold": 20,
+        "entries": [
+            {
+                "enabled": true,
+                "id": "workspaces"
+            },
+            {
+                "enabled": true,
+                "id": "activeWindow"
+            },
+            {
+                "enabled": true,
+                "id": "tray"
+            },
+            {
+                "enabled": true,
+                "id": "clock"
+            },
+            {
+                "enabled": true,
+                "id": "statusIcons"
+            },
+            {
+                "enabled": true,
+                "id": "power"
+            }
+        ],
+        "persistent": false,
+        "popouts": {
+            "activeWindow": true
+        },
+        "showOnHover": true,
+        "status": {
+            "showAudio": true,
+            "showBattery": true,
+            "showBluetooth": true,
+            "showLockStatus": true,
+            "showMicrophone": true,
+            "showNetwork": true,
+            "showWifi": false
+        },
+        "tray": {
+            "background": true,
+            "compact": true,
+            "recolour": true
+        },
+        "workspaces": {
+            "activeIndicator": true,
+            "activeTrail": true,
+            "maxWindowIcons": 5,
+            "occupiedBg": true,
+            "showWindows": false,
+            "showWindowsOnSpecialWorkspaces": true,
+            "shown": 10
+        }
+    },
+    "border": {
+        "rounding": 12,
+        "smoothing": 1,
+        "thickness": 1
+    },
+    "dashboard": {
+        "performance": {
+            "showBattery": true,
+            "showCpu": true,
+            "showGpu": true,
+            "showMemory": true,
+            "showNetwork": true,
+            "showStorage": true
+        },
+        "showDashboard": true,
+        "showMedia": true,
+        "showPerformance": true,
+        "showWeather": true
+    },
+    "general": {
+        "idle": {
+            "inhibitWhenAudio": true,
+            "lockBeforeSleep": true,
+            "timeouts": [
+                {
+                    "enabled": true,
+                    "idleAction": "lock",
+                    "respectInhibitors": true,
+                    "returnAction": "unlock",
+                    "timeout": 180000
+                },
+                {
+                    "enabled": true,
+                    "idleAction": "dpms off",
+                    "respectInhibitors": true,
+                    "returnAction": "dpms on",
+                    "timeout": 300000
+                }
+            ]
+        }
+    },
+    "launcher": {
+        "enableDangerousActions": true,
+        "maxShown": 8,
+        "showOnHover": false,
+        "vimKeybinds": false
+    },
+    "lock": {
+        "enableFprint": true,
+        "hideNotifs": false,
+        "maxFprintTries": 3,
+        "recolourLogo": true
+    },
+    "notifs": {
+        "actionOnClick": true,
+        "clearThreshold": 0.3,
+        "defaultExpireTimeout": 3000,
+        "expandThreshold": 3,
+        "expire": true,
+        "fullscreenExpireTimeout": 0,
+        "groupPreviewNum": 3,
+        "openExpanded": true
+    },
+    "osd": {
+        "enableBrightness": true,
+        "enableMicrophone": true,
+        "hideDelay": 1500
+    },
+    "services": {
+        "weatherLocation": ""
+    },
+    "utilities": {
+        "maxToasts": 3,
+        "toasts": {
+            "audioInputChanged": true,
+            "audioOutputChanged": true,
+            "capsLockChanged": false,
+            "chargingChanged": true,
+            "configLoaded": true,
+            "dndChanged": true,
+            "fullscreen": "important",
+            "gameModeChanged": true,
+            "kbLayoutChanged": false,
+            "kbLimit": false,
+            "nowPlaying": true,
+            "numLockChanged": false,
+            "vpnChanged": true
+        }
+    }
+}
