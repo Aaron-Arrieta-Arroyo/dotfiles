@@ -48,7 +48,7 @@ return {
     inactiveWindowBorderColour = "rgba(" .. scheme.onSurfaceVariant .. "11)",
 
     -- Misc
-    volumeStep                 = 10,
+    volumeStep                 = 1,
     volumeMax                  = 100,
     cursorTheme                = "sweet-cursors",
     cursorSize                 = 24,

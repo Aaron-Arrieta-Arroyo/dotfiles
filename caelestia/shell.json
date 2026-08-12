@@ -85,7 +85,7 @@
         },
         "tray": {
             "background": true,
-            "compact": true,
+            "compact": false,
             "recolour": true
         },
         "workspaces": {
@@ -123,14 +123,14 @@
             "lockBeforeSleep": true,
             "timeouts": [
                 {
-                    "enabled": true,
+                    "enabled": false,
                     "idleAction": "lock",
                     "respectInhibitors": true,
                     "returnAction": "unlock",
                     "timeout": 180000
                 },
                 {
-                    "enabled": true,
+                    "enabled": false,
                     "idleAction": "dpms off",
                     "respectInhibitors": true,
                     "returnAction": "dpms on",
