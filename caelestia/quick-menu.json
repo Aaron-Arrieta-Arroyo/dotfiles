@@ -1,0 +1,49 @@
+[
+  {
+    "section": "Apps",
+    "name": "Android Studio",
+    "icon": "android-studio",
+    "id": "android-studio",
+    "key": "SHIFT + X"
+  },
+  {
+    "section": "Acciones rápidas",
+    "name": "Terminal",
+    "icon": "terminal",
+    "key": "SUPER + return",
+    "command": [
+      "foot"
+    ]
+  },
+  {
+    "section": "Herramientas",
+    "name": "Zed Editor",
+    "icon": "zed",
+    "command": [
+      "zed"
+    ],
+    "key": "SUPER + SHIFT + Z"
+  },
+  {
+    "section": "Acciones rápidas",
+    "name": "Navegador",
+    "icon": "travel_explore",
+    "command": [
+      "brave"
+    ]
+  },
+  {
+    "section": "Cajones",
+    "name": "Musica",
+    "icon": "music_note",
+    "command": [
+      "spotify"
+    ]
+  },
+  {
+    "section": "Caelestia / shell",
+    "name": "Launcher",
+    "icon": "terminal",
+    "key": "SUPER + space"
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "wallpaper": {
+    "postHook": "sudo /home/aarons_aa/.local/bin/caelestia-sddm-hook"
+  }
+}
