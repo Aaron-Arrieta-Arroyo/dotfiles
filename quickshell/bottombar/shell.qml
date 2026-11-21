@@ -172,9 +172,8 @@ ShellRoot {
                                     if (ev.button === Qt.RightButton && app.running) {
                                         app.modelData.running[0].close();
                                     } else if (ev.button === Qt.LeftButton && app.running) {
-                                        const w = app.modelData.running;
-                                        const i = w.findIndex(t => t.activated);
-                                        w[(i + 1) % w.length].activate();
+                                        // Bring it to this workspace instead of jumping to its own.
+                                        Quickshell.execDetached([Quickshell.env("HOME") + "/.config/quickshell/bottombar/raise-app.sh", app.modelData.id]);
                                     } else if (app.entry) {
                                         app.entry.execute();
                                     }
