@@ -16,8 +16,15 @@ ShellRoot {
     // Pinned apps (desktop file ids, without .desktop). Edit to taste.
     readonly property var pinned: ["brave-browser", "steam", "equibop", "spotify", "thunar", "foot", "cursor"]
 
-    // Apps whose click always launches (new window / open), even if already running.
-    readonly property var launchAlways: ["brave-browser", "steam", "spotify"]
+    // Click on a dock app: Brave always opens a new window; any other app is launched if
+    // closed, or brought to the current workspace if running (never jumps to its workspace).
+    function open(id) {
+        const running = ToplevelManager.toplevels.values.some(t => t.appId.toLowerCase() === id);
+        if (id === "brave-browser" || !running)
+            DesktopEntries.heuristicLookup(id)?.execute();
+        else
+            Quickshell.execDetached([Quickshell.env("HOME") + "/.config/quickshell/bottombar/raise-app.sh", id]);
+    }
 
     // Colours follow the Caelestia scheme; fallbacks are the gothic palette.
     property string panel: ""   // "", "net" or "bt"
@@ -37,6 +44,7 @@ ShellRoot {
     IpcHandler {
         target: "bar"
         function toggle(name: string): void { root.toggle(name); }
+        function open(id: string): void { root.open(id); }
     }
 
     PwObjectTracker { objects: [Pipewire.defaultAudioSink] }
@@ -174,9 +182,8 @@ ShellRoot {
                                 onClicked: ev => {
                                     if (ev.button === Qt.RightButton && app.running) {
                                         app.modelData.running[0].close();
-                                    } else if (ev.button === Qt.LeftButton && app.running && !root.launchAlways.includes(app.modelData.id)) {
-                                        // Bring it to this workspace instead of jumping to its own.
-                                        Quickshell.execDetached([Quickshell.env("HOME") + "/.config/quickshell/bottombar/raise-app.sh", app.modelData.id]);
+                                    } else if (ev.button === Qt.LeftButton) {
+                                        root.open(app.modelData.id);
                                     } else if (app.entry) {
                                         app.entry.execute();
                                     }
