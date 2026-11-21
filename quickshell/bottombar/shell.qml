@@ -105,7 +105,7 @@ ShellRoot {
                 radius: 18
                 color: Qt.rgba(0.008, 0.008, 0.024, 0.8)
                 border.width: 1
-                border.color: Qt.rgba(0.83, 0.2, 0.29, 0.4)
+                border.color: Qt.rgba(0.478, 0.471, 1, 0.45)
 
                 Row {
                     id: row
@@ -117,7 +117,7 @@ ShellRoot {
                         width: 42; height: 42
                         Rectangle {
                             anchors.fill: parent; radius: 12
-                            color: lm.containsMouse ? Qt.rgba(0.83, 0.2, 0.29, 0.3) : "transparent"
+                            color: lm.containsMouse ? Qt.rgba(0.478, 0.471, 1, 0.3) : "transparent"
                         }
                         Text {
                             anchors.centerIn: parent
@@ -145,7 +145,7 @@ ShellRoot {
 
                             Rectangle {
                                 anchors.fill: parent; radius: 12
-                                color: am.containsMouse ? Qt.rgba(0.83, 0.2, 0.29, 0.3)
+                                color: am.containsMouse ? Qt.rgba(0.478, 0.471, 1, 0.3)
                                      : app.active ? Qt.rgba(1, 1, 1, 0.1) : "transparent"
                             }
                             Image {
@@ -198,7 +198,7 @@ ShellRoot {
                 radius: 16
                 color: Qt.rgba(0.008, 0.008, 0.024, 0.8)
                 border.width: 1
-                border.color: Qt.rgba(0.83, 0.2, 0.29, 0.4)
+                border.color: Qt.rgba(0.478, 0.471, 1, 0.45)
 
                 Row {
                     id: status

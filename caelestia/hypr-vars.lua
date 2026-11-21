@@ -3,8 +3,8 @@ return {
     windowOpacity = 0.88,
     blurSize      = 10,
     blurPasses    = 3,
-    activeWindowBorderColour   = "rgba(ff4664d9)",
-    inactiveWindowBorderColour = "rgba(b8324a55)",
+    activeWindowBorderColour   = "rgba(7a78ffe6)",
+    inactiveWindowBorderColour = "rgba(7a78ff40)",
     shadowColour               = "rgba(7a78ff55)",
     editor  = "/home/aarons_aa/Applications/VSCode/bin/code",
 }
