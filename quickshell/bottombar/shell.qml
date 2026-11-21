@@ -16,6 +16,9 @@ ShellRoot {
     // Pinned apps (desktop file ids, without .desktop). Edit to taste.
     readonly property var pinned: ["brave-browser", "steam", "equibop", "spotify", "thunar", "foot", "cursor"]
 
+    // Apps whose click always launches (new window / open), even if already running.
+    readonly property var launchAlways: ["brave-browser", "steam", "spotify"]
+
     // Colours follow the Caelestia scheme; fallbacks are the gothic palette.
     property string panel: ""   // "", "net" or "bt"
     function toggle(name) { panel = panel === name ? "" : name; }
@@ -171,7 +174,7 @@ ShellRoot {
                                 onClicked: ev => {
                                     if (ev.button === Qt.RightButton && app.running) {
                                         app.modelData.running[0].close();
-                                    } else if (ev.button === Qt.LeftButton && app.running) {
+                                    } else if (ev.button === Qt.LeftButton && app.running && !root.launchAlways.includes(app.modelData.id)) {
                                         // Bring it to this workspace instead of jumping to its own.
                                         Quickshell.execDetached([Quickshell.env("HOME") + "/.config/quickshell/bottombar/raise-app.sh", app.modelData.id]);
                                     } else if (app.entry) {
