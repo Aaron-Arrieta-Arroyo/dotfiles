@@ -5,6 +5,7 @@ import Quickshell
 import Quickshell.Services.Notifications
 import Caelestia
 import Caelestia.Config
+import Caelestia.I18n
 import qs.services
 import qs.utils
 
@@ -16,7 +17,20 @@ QtObject {
     property var locks: new Set()
 
     property date time: new Date()
-    property string timeStr: qsTr("now")
+    property int ageMins: 0
+    readonly property string timeStr: {
+        if (ageMins < 1)
+            return Tr.tr("now");
+
+        const h = Math.floor(ageMins / 60);
+        const d = Math.floor(h / 24);
+
+        if (d > 0)
+            return Tr.trCtx("%1d", "abbreviated notification age, days").arg(d);
+        if (h > 0)
+            return Tr.trCtx("%1h", "abbreviated notification age, hours").arg(h);
+        return Tr.trCtx("%1m", "abbreviated notification age, minutes").arg(ageMins);
+    }
 
     readonly property Timer timeStrTimer: Timer {
         running: !notif.closed
@@ -38,15 +52,6 @@ QtObject {
     property bool resident
     property bool hasActionIcons
     property list<var> actions
-
-    readonly property bool isSlack: {
-        if (!notif.notification)
-            return false;
-        const hints = notif.notification.hints;
-        const desktopEntry = hints && hints["desktop-entry"] ? String(hints["desktop-entry"]) : "";
-        const haystack = (String(notif.notification.appName) + " " + String(notif.notification.desktopEntry) + " " + desktopEntry).toLowerCase();
-        return haystack.includes("slack");
-    }
 
     readonly property bool hasFullscreen: {
         const monitor = Hypr.focusedMonitor;
@@ -145,13 +150,11 @@ QtObject {
         }
 
         function onExpireTimeoutChanged(): void {
-            if (!notif.isSlack)
-                notif.expireTimeout = notif.notification.expireTimeout;
+            notif.expireTimeout = notif.notification.expireTimeout;
         }
 
         function onUrgencyChanged(): void {
-            if (!notif.isSlack)
-                notif.urgency = notif.notification.urgency;
+            notif.urgency = notif.notification.urgency;
         }
 
         function onResidentChanged(): void {
@@ -182,24 +185,20 @@ QtObject {
     function updateTimeStr(): void {
         const diff = Date.now() - time.getTime();
         const m = Math.floor(diff / 60000);
+        ageMins = m;
 
         if (m < 1) {
-            timeStr = qsTr("now");
             timeStrTimer.interval = 5000;
         } else {
             const h = Math.floor(m / 60);
             const d = Math.floor(h / 24);
 
-            if (d > 0) {
-                timeStr = `${d}d`;
+            if (d > 0)
                 timeStrTimer.interval = 3600000;
-            } else if (h > 0) {
-                timeStr = `${h}h`;
+            else if (h > 0)
                 timeStrTimer.interval = 300000;
-            } else {
-                timeStr = `${m}m`;
+            else
                 timeStrTimer.interval = m < 10 ? 30000 : 60000;
-            }
         }
     }
 
@@ -240,12 +239,9 @@ QtObject {
         maybeTriggerDummyImageLoader();
         expireTimeout = notification.expireTimeout;
         hints = notification.hints;
-        urgency = notif.isSlack ? NotificationUrgency.Critical : notification.urgency;
+        urgency = notification.urgency;
         resident = notification.resident;
         hasActionIcons = notification.hasActionIcons;
-        // Slack: prioridad máxima y mayor tiempo visible en pantalla
-        if (notif.isSlack)
-            expireTimeout = 15000;
         // qmllint disable unresolved-type
         actions = notification.actions.map(a => ({
                     // qmllint enable unresolved-type

@@ -44,6 +44,8 @@ PageBase {
                 text: modelData?.name ?? ""
                 onClicked: {
                     Wallpapers.setWallpaper(modelData.path);
+                    root.nState.closeSubPage();
+                    root.nState.closeSubPage();
                 }
             }
         }

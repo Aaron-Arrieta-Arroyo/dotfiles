@@ -6,13 +6,12 @@ import qs.components
 import qs.components.effects
 import qs.components.images
 import qs.services
-import qs.utils
 
 Item {
     id: root
 
     required property FileSystemEntry modelData
-    required property DrawerVisibilities visibilities
+    required property ScreenState screenState
 
     scale: 0.5
     opacity: 0
@@ -30,7 +29,7 @@ Item {
         radius: Tokens.rounding.large
         onClicked: {
             Wallpapers.setWallpaper(root.modelData.path);
-            root.visibilities.launcher = false;
+            root.screenState.launcher = false;
         }
     }
 
@@ -67,14 +66,7 @@ Item {
 
         CachingImage {
             anchors.fill: parent
-            path: {
-                const src = root.modelData.path;
-                const home = Paths.home;
-                const cache = Paths.cache;
-                if (src.startsWith(home))
-                    return cache + "/thumbnails" + src.slice(home.length);
-                return src;
-            }
+            path: root.modelData.path
             smooth: !root.PathView.view.moving
             sourceSize: {
                 const dpr = (QsWindow.window as QsWindow)?.devicePixelRatio ?? 1;

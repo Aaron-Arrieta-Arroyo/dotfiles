@@ -6,9 +6,9 @@
             }
         },
         "transparency": {
-            "base": 0,
-            "enabled": false,
-            "layers": 0
+            "enabled": true,
+            "base": 0.8,
+            "layers": 0.55
         }
     },
     "background": {
@@ -49,19 +49,19 @@
                 "id": "workspaces"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "activeWindow"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "tray"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "clock"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "statusIcons"
             },
             {
@@ -74,15 +74,32 @@
             "activeWindow": true
         },
         "showOnHover": true,
-        "status": {
-            "showAudio": true,
-            "showBattery": true,
-            "showBluetooth": true,
-            "showLockStatus": true,
-            "showMicrophone": true,
-            "showNetwork": true,
-            "showWifi": false
-        },
+        "statusIcons": [
+            {
+                "enabled": true,
+                "id": "lockStatus"
+            },
+            {
+                "enabled": true,
+                "id": "audio"
+            },
+            {
+                "enabled": true,
+                "id": "microphone"
+            },
+            {
+                "enabled": true,
+                "id": "network"
+            },
+            {
+                "enabled": true,
+                "id": "bluetooth"
+            },
+            {
+                "enabled": true,
+                "id": "battery"
+            }
+        ],
         "tray": {
             "background": true,
             "compact": false,
@@ -96,7 +113,8 @@
             "showWindows": false,
             "showWindowsOnSpecialWorkspaces": true,
             "shown": 10
-        }
+        },
+        "excludedScreens": []
     },
     "border": {
         "rounding": 12,
@@ -126,7 +144,7 @@
                     "enabled": false,
                     "idleAction": "lock",
                     "respectInhibitors": true,
-                    "returnAction": "unlock",
+                    "returnAction": "",
                     "timeout": 180000
                 },
                 {
@@ -185,6 +203,24 @@
             "nowPlaying": true,
             "numLockChanged": false,
             "vpnChanged": true
-        }
+        },
+        "quickToggles": [
+            {
+                "id": "mic",
+                "enabled": true
+            },
+            {
+                "id": "settings",
+                "enabled": true
+            },
+            {
+                "id": "gameMode",
+                "enabled": true
+            },
+            {
+                "id": "dnd",
+                "enabled": true
+            }
+        ]
     }
 }

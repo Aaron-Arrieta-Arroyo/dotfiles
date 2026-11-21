@@ -7,6 +7,7 @@ import Quickshell.Io
 import Quickshell.Services.Notifications
 import Caelestia
 import Caelestia.Config
+import Caelestia.I18n
 import qs.components.misc
 import qs.services
 import qs.utils
@@ -29,19 +30,10 @@ Singleton {
         return false;
     }
 
-    function isSlackSource(notification): bool {
-        const hints = notification.hints;
-        const desktopEntry = hints && hints["desktop-entry"] ? String(hints["desktop-entry"]) : "";
-        const haystack = (String(notification.appName) + " " + String(notification.desktopEntry) + " " + desktopEntry).toLowerCase();
-        return haystack.includes("slack");
-    }
-
-    function shouldShowPopup(notification): bool {
-        if (notification && root.isSlackSource(notification))
-            return true;
-        if (props.dnd || [...Visibilities.screens.values()].some(v => v.sidebar))
+    function shouldShowPopup(): bool {
+        if (props.dnd || ShellState.anySidebarOpen())
             return false;
-        if (GlobalConfig.notifs.fullscreen === "off" && hasFullscreen())
+        if (GlobalConfig.notifs.fullscreen === NotifsFullscreen.Off && hasFullscreen())
             return false;
         return true;
     }
@@ -51,9 +43,9 @@ Singleton {
             return;
 
         if (dnd)
-            Toaster.toast(qsTr("Do not disturb enabled"), qsTr("Popup notifications are now disabled"), "do_not_disturb_on");
+            Toaster.toast(Tr.tr("Do not disturb enabled"), Tr.tr("Popup notifications are now disabled"), "do_not_disturb_on");
         else
-            Toaster.toast(qsTr("Do not disturb disabled"), qsTr("Popup notifications are now enabled"), "do_not_disturb_off");
+            Toaster.toast(Tr.tr("Do not disturb disabled"), Tr.tr("Popup notifications are now enabled"), "do_not_disturb_off");
     }
 
     onListChanged: {
@@ -103,22 +95,12 @@ Singleton {
         onNotification: notif => {
             notif.tracked = true;
 
-            if (root.isSlackSource(notif))
-                notifSoundProcess.running = true;
-
             const comp = notifComp.createObject(root, {
-                popup: root.shouldShowPopup(notif),
+                popup: root.shouldShowPopup(),
                 notification: notif
             });
             root.list = [comp, ...root.list];
         }
-    }
-
-    Process {
-        id: notifSoundProcess
-
-        command: ["pw-play", "/usr/share/sounds/freedesktop/stereo/complete.oga"]
-        running: false
     }
 
     FileView {

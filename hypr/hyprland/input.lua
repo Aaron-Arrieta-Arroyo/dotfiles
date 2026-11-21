@@ -1,14 +1,9 @@
 local vars = require("variables")
 
-hl.device({
-    name        = "syna7db5:01-06cb:ceb1-touchpad",
-    sensitivity = 0.3,
-})
-
 hl.config({
     input = {
-        kb_layout          = "latam",
-        numlock_by_default = true,
+        kb_layout          = "us",
+        numlock_by_default = false,
         repeat_delay       = 250,
         repeat_rate        = 35,
         focus_on_close     = 1,

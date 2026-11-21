@@ -7,30 +7,17 @@ import Caelestia.Config
 import qs.components
 import qs.components.controls
 import qs.services
-import qs.utils
 
 Item {
     id: root
 
-    property string source
+    property alias source: img.source
     property alias text: label.text
     property alias radius: imgWrapper.radius
     property alias imgHeight: imgWrapper.implicitHeight
     property bool fillLabel: true
 
-    readonly property string thumbnailSource: {
-        if (!source) return "";
-        const home = Paths.home;
-        const cache = Paths.cache;
-        if (source.startsWith(home))
-            return cache + "/thumbnails" + source.slice(home.length);
-        return source;
-    }
-
     signal clicked
-
-    onSourceChanged: img.source = thumbnailSource
-    Component.onCompleted: img.source = thumbnailSource
 
     Layout.fillWidth: true
     implicitHeight: layout.implicitHeight
