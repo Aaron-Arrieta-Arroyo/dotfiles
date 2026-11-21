@@ -15,6 +15,8 @@ hl.config({
             input_methods     = vars.blurInputMethods,
             size              = vars.blurSize,
             passes            = vars.blurPasses,
+            vibrancy          = 0.5,  -- keeps the wallpaper colours alive through the blur
+            contrast          = 1.1,
         },
 
         shadow = {
