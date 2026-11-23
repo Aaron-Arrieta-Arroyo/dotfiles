@@ -87,6 +87,8 @@ ShellRoot {
             exclusiveZone: 0
             color: "transparent"
             WlrLayershell.namespace: "bottombar"
+            // Encima de caelestia-drawers (pantalla completa), que si no tapa el borde inferior en escritorios vacíos.
+            WlrLayershell.layer: WlrLayer.Overlay
 
             // Auto-hide: only a thin strip (or the bar itself, when shown) takes input.
             property bool shown: hover.hovered || hideDelay.running || root.panel !== ""
